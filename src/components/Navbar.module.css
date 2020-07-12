@@ -1,0 +1,22 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,700;1,600&display=swap');
+
+.paginationCol {
+  font-family: 'Nunito', sans-serif;
+  font-weight: light;
+}
+
+.prevBtn {
+  composes: paginationCol; 
+  text-align: left;
+  margin-left: 20px;
+}
+.nextBtn {
+  composes: paginationCol; 
+  text-align: right;
+  margin-right: 20px;
+}
+.pagInfo {
+  composes: paginationCol; 
+  text-align: center;
+}

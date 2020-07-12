@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import ColorCard from './ColorCard'
+import CopyNotification from './CopyNotification'
 import { Row } from 'react-bootstrap';
 
 
 
-const CardsBoards = ({ colorList }) => {
+const CardsBoards = ({ colorList, hideNavbar }) => {
   const [colorCopied, toggleCopy] = useState(false);
   const [colorID, setColorID] = useState('');
   
-  // hook for 
+  // Effect trigered on colorCopied true/false state change
+  // On right working of clipboard-write, sets timer for display de success notification.
   useEffect(() => {
-    console.log('effect runs');
-    const interval = setInterval(() => console.log("copiadoState: " + colorCopied), 1000);
-
     if(colorCopied) {
-      setTimeout(() => toggleCopy(false), 3000);
+      setTimeout(() => toggleCopy(false), 2000);
+      setTimeout(() => hideNavbar(false), 2000);
     }
-
-    return () => clearInterval(interval);
   }, [colorCopied]);
 
 
@@ -30,16 +28,37 @@ const CardsBoards = ({ colorList }) => {
   function copySuccess(colorID) {
     setColorID(colorID);
     toggleCopy(true);
-    console.log("colorID: " + colorID)
+    hideNavbar(true);
   }
 
-  return (
-    <Row className="cardsBoard">
-      {colorList.map((color, i) => (
-          <ColorCard key={i} props={color} copyColor={copySuccess} />
-      ))}
-    </Row>
-  )
+  /* rendering either the grid colors, or the success notification when flag is up  */
+  
+  if(colorCopied) {
+    // for copy-success notification, we display the already developed ColorCard, changing the text parametres
+    
+    let rightCopiedProps = {
+      id: colorList.find(col => col.id === colorID).id,
+      name: colorList.find(col => col.id === colorID).name,
+      color: colorList.find(col => col.id === colorID).color,
+      pantone_value: colorList.find(col => col.id === colorID).pantone_value
+      
+    }
+    //console.log(rightCopiedProps);
+    return (
+      <Row className="cardsBoard">
+        <CopyNotification props={rightCopiedProps}/>
+      </Row>
+    )
+  } else {
+    
+    return (
+      <Row className="cardsBoard">
+        {colorList.map((color, i) => (
+            <ColorCard key={i} props={color} copyColor={copySuccess} />
+        ))}
+      </Row>
+    )
+  }
 };
 
 export default CardsBoards

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Navbar from './Navbar'
 import CardsBoard from './CardsBoard'
+
 import { Row, Col } from 'react-bootstrap';
 import './ColorsAlbum.css';
 import axios from 'axios';
@@ -13,7 +14,8 @@ class ColorsAlbum extends Component {
       currentPage: 1,
       totalPages: 0,
       colorsData: [],
-      usersFetched: false
+      usersFetched: false,
+      navbarVisible: true
     };
   }
 
@@ -60,6 +62,10 @@ decrPag = () => {
   }
 }
 
+hideNavbar = (bool) => {
+  this.setState({navbarVisible: bool})
+}
+
   render() {
     if (this.state.usersFetched)
     {
@@ -68,12 +74,16 @@ decrPag = () => {
           <Row>
             <Col className="headerBar"> Colores </Col>  
           </Row> 
-          <CardsBoard colorList={this.state.colorsData}/ >
-          <Navbar incrPage={this.incrPag} decrPage={this.decrPag} currentPage={this.state.currentPage} totalPages={this.state.totalPages}></Navbar>
+          <CardsBoard colorList={this.state.colorsData} hideNavbar={this.hideNavbar}/ >
+          <Navbar className={`navBar ${this.state.navbarVisible ? "" : "notDisplayed"}`} incrPage={this.incrPag} decrPage={this.decrPag} currentPage={this.state.currentPage} totalPages={this.state.totalPages}></Navbar>
         </Fragment>
       );
     } else {
-      return (<p>Cargando colores... </p>)
+      return (
+      <Row>
+        <Col className="loadingMsg"> <h1>Cargando colores ... </h1> </Col>  
+      </Row> 
+      )
     }
   }
 

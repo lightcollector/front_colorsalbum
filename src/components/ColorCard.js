@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
+import styles from './ColorCard.module.css';
 
 const ColorCard = (props) => {
 /**
@@ -9,7 +10,6 @@ const ColorCard = (props) => {
  * @param  {string, int, function}
  */ 
   function updateClipboard(newClip, colorId, copySuccessFn) {
-    console.log("Le has dado lick a: " + newClip);
     // checking Permissions API's "clipboard-write" permission
     navigator.permissions.query({name: "clipboard-write"}).then(result => {
       if (result.state === "granted" || result.state === "prompt") {
@@ -27,16 +27,15 @@ const ColorCard = (props) => {
       }
     });
   }
-
   return (
-    <Col xs={6} sm={6} md={4} lg={4} className="colorCard"  
+    <Col xs={6} sm={6} md={4} lg={4} className={styles.colorCard}  
       onClick={() => updateClipboard(props.props.color, props.props.id, props.copyColor)}      
       style={{backgroundColor : `${props.props.color}`}}>
       
-      <p className="colorYear">{props.props.year}</p>
-      <h4 className="colorHex">{props.props.name}</h4>
-      <h1 className="colorHex">{props.props.color}</h1>
-      <p className="colorPantone">{props.props.pantone_value}</p>
+      <p className={styles.colorYear}> {props.props.year} </p>
+      <h4 className={styles.colorName}> {props.props.name} </h4>
+      <h1 className={styles.colorHex}> {props.props.color} </h1>
+      <p className={styles.colorPantone}> {props.props.pantone_value} </p>
     </Col>
   ); 
 };
