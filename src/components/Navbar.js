@@ -1,20 +1,21 @@
 import React, { useState, Fragment } from 'react';
 import Button from 'react-bootstrap/Button';
+import { Row } from 'react-bootstrap';
 
 // functional component to render the pagination buttons
-const Pagination = ({decrPage, incrPage, currentPage, totalPages}) => {
+const Navbar = ({decrPage, incrPage, currentPage, totalPages}) => {
     const [nextAvailable, enableNextBtn] = useState(false);
     const [prevAvailable, enablePrevBtn] = useState(false)
     return (
-      <Fragment>
+      <Row>
         <Button onClick={decrPage} className={currentPage}> Anterior </Button> 
-        <p>Página actual: {currentPage}/{totalPages} </p>
+        <p>Página: {currentPage}/{totalPages} </p>
         <Button onClick={incrPage}> Siguiente </Button>
-      </Fragment> 
+      </Row> 
     );
   }
 
-  export default Pagination;
+  export default Navbar;
 
 
 //       <Button onClick={decrPage}> Anterior </Button>

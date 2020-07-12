@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Navbar from './Navbar'
+import CardsBoard from './CardsBoard'
+import { Row, Col } from 'react-bootstrap';
 import './ColorsAlbum.css';
 import axios from 'axios';
 
@@ -11,6 +13,7 @@ class ColorsAlbum extends Component {
       currentPage: 1,
       totalPages: 0,
       colorsData: [],
+      usersFetched: false
     };
   }
 
@@ -29,16 +32,16 @@ componentDidUpdate(prevProbs, prevState) {
 
 // getting colors data, first page by default
 fetchData = (pg = 1) => {
-  console.log("la dire: " + `${process.env.REACT_APP_COLORS_ALBUM_BASE_URL}?page=${pg}`)
   axios.get(`${process.env.REACT_APP_COLORS_ALBUM_BASE_URL}?page=${pg}`)
     .then(res => {
       const colorData = res.data
-      console.log(colorData);
       this.setState({ 
         currentPage: colorData.page,
         totalPages: colorData.total_pages,
         colorsData: colorData.data
       })
+      this.setState({usersFetched: true})
+
     })
     
 }
@@ -58,9 +61,20 @@ decrPag = () => {
 }
 
   render() {
-    return (
-      <Navbar incrPage={this.incrPag} decrPage={this.decrPag} currentPage={this.state.currentPage} totalPages={this.state.totalPages}></Navbar>
-    );
+    if (this.state.usersFetched)
+    {
+      return (
+        <Fragment>
+          <Row>
+            <Col className="headerBar"> Colores </Col>  
+          </Row> 
+          <CardsBoard colorList={this.state.colorsData}/ >
+          <Navbar incrPage={this.incrPag} decrPage={this.decrPag} currentPage={this.state.currentPage} totalPages={this.state.totalPages}></Navbar>
+        </Fragment>
+      );
+    } else {
+      return (<p>Cargando colores... </p>)
+    }
   }
 
 }
