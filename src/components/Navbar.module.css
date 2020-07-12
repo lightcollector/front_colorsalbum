@@ -1,22 +1,40 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,700;1,600&display=swap');
 
+.navBar {
+  background-color: #E0E0E0;
+  padding: 5px;
+  margin: 10px;
+}
 .paginationCol {
   font-family: 'Nunito', sans-serif;
   font-weight: light;
+  vertical-align: center;
 }
-
 .prevBtn {
   composes: paginationCol; 
   text-align: left;
-  margin-left: 20px;
+  margin:  10px 0 10px 20px;
+  text-decoration: none;
 }
+.prevBtn:focus { outline:none }
+
 .nextBtn {
   composes: paginationCol; 
   text-align: right;
-  margin-right: 20px;
+  margin:  10px 20px 10px 0;
+  text-decoration: none;
 }
+.nextBtn:focus { outline:none }
+
 .pagInfo {
   composes: paginationCol; 
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.pagInfo > p {
+  margin: 0px;
 }

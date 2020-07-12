@@ -32,18 +32,17 @@ const CardsBoards = ({ colorList, hideNavbar }) => {
   }
 
   /* rendering either the grid colors, or the success notification when flag is up  */
-  
   if(colorCopied) {
     // for copy-success notification, we display the already developed ColorCard, changing the text parametres
     
     let rightCopiedProps = {
       id: colorList.find(col => col.id === colorID).id,
+      year: colorList.find(col => col.id === colorID).year,
       name: colorList.find(col => col.id === colorID).name,
       color: colorList.find(col => col.id === colorID).color,
       pantone_value: colorList.find(col => col.id === colorID).pantone_value
       
     }
-    //console.log(rightCopiedProps);
     return (
       <Row className="cardsBoard">
         <CopyNotification props={rightCopiedProps}/>
