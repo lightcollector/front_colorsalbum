@@ -28,14 +28,16 @@ const ColorCard = (props) => {
     });
   }
   return (
-    <Col xs={6} sm={6} md={4} lg={4} className={styles.colorCard}  
-      onClick={() => updateClipboard(props.props.color, props.props.id, props.copyColor)}      
-      style={{backgroundColor : `${props.props.color}`}}>
-      
-      <p className={styles.colorYear}> {props.props.year} </p>
-      <h4 className={styles.colorName}> {props.props.name} </h4>
-      <h1 className={styles.colorHex}> {props.props.color} </h1>
-      <p className={styles.colorPantone}> {props.props.pantone_value} </p>
+    <Col xs={6} sm={6} md={4} lg={4} className={styles.cardWraper}>
+      <div className={styles.colorCard}  
+          onClick={() => updateClipboard(props.props.color, props.props.id, props.copyColor)}      
+          style={{backgroundColor : `${props.props.color}`}}>
+
+        <p className={styles.colorYear}> {props.props.year} </p>
+        <h4 className={styles.colorName}> {props.props.name} </h4>
+        <h1 className={styles.colorHex}> {props.props.color} </h1>
+        <p className={styles.colorPantone}> {props.props.pantone_value} </p>
+      </div>
     </Col>
   ); 
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ColorCard from './ColorCard'
+import style from './ColorCard.module.css'
 import CopyNotification from './CopyNotification'
 import { Row } from 'react-bootstrap';
 
@@ -44,14 +45,14 @@ const CardsBoards = ({ colorList, hideNavbar }) => {
       
     }
     return (
-      <Row className="cardsBoard">
+      <Row className={style.cardsBoard}>
         <CopyNotification props={rightCopiedProps}/>
       </Row>
     )
   } else {
     
     return (
-      <Row className="cardsBoard">
+      <Row className={style.cardsBoard}>
         {colorList.map((color, i) => (
             <ColorCard key={i} props={color} copyColor={copySuccess} />
         ))}

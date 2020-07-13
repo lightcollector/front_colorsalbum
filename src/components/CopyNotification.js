@@ -9,7 +9,7 @@ const CopyNotification = (props) => {
       style={{backgroundColor : `${props.props.color}`}}>
       
       <p className={styles.colorYear}>{props.props.year}</p>
-      <h1 className={styles.colorName}> ¡Copiado! </h1>
+      <h1 className={styles.colorNotifText}> ¡Copiado! </h1>
       <p className={styles.colorPantone}>{props.props.pantone_value}</p>
     </Col>
   ); 
